@@ -2,6 +2,7 @@ import cv2 as cv
 import numpy as np 
 import time
 from numpy import save, loadtxt
+import torch
 
 labels = loadtxt('/home/mostafathereal/Desktop/comma.ai_speed_challenge/data/train.txt', delimiter = "\n")
 
@@ -9,7 +10,6 @@ cap = cv.VideoCapture('/home/mostafathereal/Desktop/comma.ai_speed_challenge/dat
 
 width  = cap.get(3)
 height = cap.get(4)
-
 print("WIDTH -- ", width, "HEIGHT -- ", height)
 
 # ret = a boolean return value from 
@@ -48,7 +48,7 @@ for i in range(1, 20390):
         # print(len(angle), len(angle[0]))
         # print(len(gray), len(gray[0]))
 
-        arr = [magnitude, angle, gray]
+        arr = [[magnitude, angle, gray/255]]
         train_data.append(arr)
         label_data.append(labels[i])
 
@@ -67,9 +67,11 @@ for i in range(1, 20390):
         if cv.waitKey(1) & 0xFF == ord('q'):
                 break
 
+# print(type(train_data))
+# print(type(label_data))
+torch.save(torch.cuda.FloatTensor(train_data), '/home/mostafathereal/Desktop/comma.ai_speed_challenge/data1/train.pt')
+torch.save(torch.cuda.FloatTensor(label_data), '/home/mostafathereal/Desktop/comma.ai_speed_challenge/data1/train_labels.pt')
 
-save('/home/mostafathereal/Desktop/comma.ai_speed_challenge/data1/train.npy', train_data)
-save('/home/mostafathereal/Desktop/comma.ai_speed_challenge/data1/train_labels.npy', label_data)
 
 cap.release()
 cv.destroyAllWindows()
