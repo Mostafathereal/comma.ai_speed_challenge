@@ -28,10 +28,12 @@ class InceptionSpeed(nn.Module):
         x = F.leaky_relu(self.lin3(x))
         return x
 
-model = InceptionSpeed().to(cuda)
-model.eval()
+# model = InceptionSpeed().to(cuda)
+# model.eval()
+# outputs = model(x)
 
-print(model(x)[0])
+
+# print(len(list(model.parameters()))
 
 # print(model)
 
