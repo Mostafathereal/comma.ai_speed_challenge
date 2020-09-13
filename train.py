@@ -5,6 +5,7 @@ from inception_tl import *
 cuda = torch.device("cuda")
 
 speedNet = InceptionSpeed().to(cuda)
+print(speedNet)
 
 criterion = torch.nn.MSELoss()
 optimizer = torch.optim.AdamW(speedNet.parameters(), lr = 0.001, betas = (0.9, 0.999))
@@ -30,7 +31,7 @@ for epoch in range(30):
         optimizer.step()
 
         running_loss += loss.item()
-        print('[%d, %5d] loss: %.3f' % (epoch + 1, i + 1, running_loss/(i+1)))
+    print('[%d, %5d] loss: %.3f' % (epoch + 1, i + 1, running_loss/len(labels)))
 
 
 print("finished training")
