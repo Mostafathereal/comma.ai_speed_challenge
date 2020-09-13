@@ -29,10 +29,10 @@ mask[..., 1] = 255
 train_data = []
 label_data = []
 
-for i in range(1, 20390):
+for i in range(1, 20397):
 
         ret, frame = cap.read()
-        cv.imshow('test input', frame)
+        cv.imshow('train set', frame)
 
         gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY) 
 
@@ -47,10 +47,10 @@ for i in range(1, 20390):
         # print(len(magnitude), len(magnitude[0]))
         # print(len(angle), len(angle[0]))
         # print(len(gray), len(gray[0]))
-
         arr = [[magnitude, angle, gray/255]]
         train_data.append(arr)
         label_data.append(labels[i])
+        print("saved frame ", i)
 
         # print("yeehaw")q
         # Converts HSV to RGB (BGR) color representation 
@@ -67,11 +67,14 @@ for i in range(1, 20390):
         if cv.waitKey(1) & 0xFF == ord('q'):
                 break
 
-# print(type(train_data))
-# print(type(label_data))
-torch.save(torch.cuda.FloatTensor(train_data), '/home/mostafathereal/Desktop/comma.ai_speed_challenge/data1/train.pt')
-torch.save(torch.cuda.FloatTensor(label_data), '/home/mostafathereal/Desktop/comma.ai_speed_challenge/data1/train_labels.pt')
-
-
 cap.release()
 cv.destroyAllWindows()
+
+# print(type(train_data))
+# print(type(label_data))
+print("ye")
+torch.save(torch.HalfTensor(train_data), '/home/mostafathereal/Desktop/comma.ai_speed_challenge/data1/train.pt')
+print("ye1")
+torch.save(torch.HalfTensor(label_data), '/home/mostafathereal/Desktop/comma.ai_speed_challenge/data1/train_labels.pt')
+print("ye3")
+
