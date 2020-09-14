@@ -10,7 +10,7 @@ from torchsummary import summary
 
 cuda = torch.device("cuda")
 
-x = torch.randn(1, 3, 640, 480).to(cuda)
+# x = torch.randn(1, 3, 640, 480).to(cuda)
 
 class InceptionSpeed(nn.Module):
     def __init__(self):
@@ -25,7 +25,7 @@ class InceptionSpeed(nn.Module):
         x = self.base(x)
         x = F.leaky_relu(self.lin1(x))
         x = F.leaky_relu(self.lin2(x))
-        x = F.leaky_relu(self.lin3(x))
+        x = F.relu6(self.lin3(x))
         return x
 
 # model = InceptionSpeed().to(cuda)
@@ -69,6 +69,6 @@ print(inception)
 # x = torch.randn(1, 1, 224, 224)
 # model = models.vgg16(pretrained=False) # pretrained=False just for debug reasons
 # first_conv_layer = [nn.Conv2d(1, 3, kernel_size=3, stride=1, padding=1, dilation=1, groups=1, bias=True)]
-# first_conv_layer.extend(list(model.features))  
-# model.features= nn.Sequential(*first_conv_layer )  
+# first_conv_layer.extend(list(model.features))
+# model.features= nn.Sequential(*first_conv_layer )
 # output = model(x)
