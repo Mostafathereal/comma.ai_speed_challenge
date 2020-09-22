@@ -4,7 +4,7 @@ speed estimation challenge presented by comma.ai; estimate speed of a car given 
 ## Proposed Solution
 ![](assets/proposed_soln.png)
 
-input:
+# input:
 ![](assets/img.png)
 
 
