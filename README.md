@@ -5,7 +5,6 @@ input:
 
 ![](assets/img.png)
 
-##proposed solution
-
+## Proposed Solution
 ![](assets/proposed_soln.png)
 
